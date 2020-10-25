@@ -207,6 +207,11 @@ public interface BinanceApiService {
     @GET("/sapi/v1/margin/openOrders")
     Call<List<Order>> getOpenMarginOrders(@Query("symbol") String symbol, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
+    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
+    @GET("/sapi/v1/margin/allOrders")
+    Call<List<Order>> getAllMarginOrders(@Query("symbol") String symbol, @Query("orderId") Long orderId,
+                                         @Query("limit") Integer limit, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/sapi/v1/margin/order")
     Call<NewOrderResponse> newMarginOrder(@Query("symbol") String symbol, @Query("side") OrderSide side, @Query("type") OrderType type,

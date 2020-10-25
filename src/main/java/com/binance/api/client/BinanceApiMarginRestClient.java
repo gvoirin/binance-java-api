@@ -2,10 +2,7 @@ package com.binance.api.client;
 
 import com.binance.api.client.domain.TransferType;
 import com.binance.api.client.domain.account.*;
-import com.binance.api.client.domain.account.request.CancelOrderRequest;
-import com.binance.api.client.domain.account.request.CancelOrderResponse;
-import com.binance.api.client.domain.account.request.OrderRequest;
-import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.domain.account.request.*;
 
 import java.util.List;
 
@@ -123,5 +120,11 @@ public interface BinanceApiMarginRestClient {
      */
     LoanQueryResult queryLoan(String asset, String txId);
 
-
+    /**
+     * Get all account orders; active, canceled, or filled.
+     *
+     * @param orderRequest order request parameters
+     * @return a list of all account orders
+     */
+    List<Order> getAllOrders(AllOrdersRequest orderRequest);
 }

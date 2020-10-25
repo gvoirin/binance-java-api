@@ -4,10 +4,7 @@ import com.binance.api.client.BinanceApiMarginRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.TransferType;
 import com.binance.api.client.domain.account.*;
-import com.binance.api.client.domain.account.request.CancelOrderRequest;
-import com.binance.api.client.domain.account.request.CancelOrderResponse;
-import com.binance.api.client.domain.account.request.OrderRequest;
-import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.domain.account.request.*;
 
 import java.util.List;
 
@@ -115,5 +112,12 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
   public MarginTransaction repay(String asset, String amount) {
     long timestamp = System.currentTimeMillis();
     return executeSync(binanceApiService.repay(asset, amount, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, timestamp));
+  }
+
+  @Override
+  public List<Order> getAllOrders(AllOrdersRequest orderRequest) {
+    return executeSync(binanceApiService.getAllMarginOrders(orderRequest.getSymbol(),
+            orderRequest.getOrderId(), orderRequest.getLimit(),
+            orderRequest.getRecvWindow(), orderRequest.getTimestamp()));
   }
 }
