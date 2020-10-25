@@ -120,4 +120,14 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
             orderRequest.getOrderId(), orderRequest.getLimit(),
             orderRequest.getRecvWindow(), orderRequest.getTimestamp()));
   }
+
+  @Override
+  public List<Trade> getMyTrades(String symbol, Integer limit, Long fromId, Long recvWindow, Long timestamp) {
+    return executeSync(binanceApiService.getMyTrades(symbol, limit, fromId, recvWindow, timestamp));
+  }
+
+  @Override
+  public List<Trade> getMyTrades(String symbol, Integer limit) {
+    return getMyTrades(symbol, limit, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis());
+  }
 }
